@@ -31,6 +31,12 @@ modalbg.style.display = "none";
 document.querySelector("form").addEventListener("submit", (event) => {
   if (!validate(event)) {
     event.preventDefault(); 
+  } else {
+    // Prevent submission to show the confirmation message
+    event.preventDefault();
+    showConfirmationMessage(() => {
+      event.target.submit();
+    });
   }
 });
 
@@ -47,7 +53,7 @@ function validate(event) {
   const birthdate = document.getElementById("birthdate").value;
 
   // Function to display an error message
-  function showError(id, message) {
+  function showErrorMessage(id, message) {
     const field = document.getElementById(id);
 
     //Search for the existing error element
@@ -65,7 +71,7 @@ function validate(event) {
   }
 
   // Function to delete an error message
-  function clearError(id) {
+  function clearErrorMessage(id) {
     const field = document.getElementById(id);
     let errorElement = field.parentNode.querySelector(".error-message");
 
@@ -76,63 +82,88 @@ function validate(event) {
 
   // First name verification
   if (firstName.length < 2 || firstName.trim() === "") {
-    showError("first", "Veuillez entrer 2 caractères ou plus pour le champ du Prénom.");
+    showErrorMessage("first", "Veuillez entrer 2 caractères ou plus pour le champ du Prénom.");
     isValid = false;
   } else {
-    clearError("first");
+    clearErrorMessage("first");
   }
 
   // Name verification
   if (lastName.length < 2 || lastName.trim() === "") {
-    showError("last", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
+    showErrorMessage("last", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
     isValid = false;
   } else {
-    clearError("last");
+    clearErrorMessage("last");
   }
 
   // Email verification
   const regexMail = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+/; 
   if (!regexMail.test(email)) {
-    showError("email", "Veuillez entrer une adresse e-mail valide.");
+    showErrorMessage("email", "Veuillez entrer une adresse e-mail valide.");
     isValid = false;
   } else {
-    clearError("email");
+    clearErrorMessage("email");
   }
 
   // birthdate verification
   const regexBirthdate = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
   if (!regexBirthdate.test(birthdate)) {
-    showError("birthdate", "Vous devez entrer votre date de naissance.");
+    showErrorMessage("birthdate", "Vous devez entrer votre date de naissance.");
     isValid = false;
   } else {
-    clearError("birthdate");
+    clearErrorMessage("birthdate");
   }
 
   // Quantity verification
   const regexQuantity = /^[0-9]+/;
   if (!regexQuantity.test(quantity)) {
-    showError("quantity", "Veuillez entrer un nombre valide.");
+    showErrorMessage("quantity", "Veuillez entrer un nombre valide.");
     isValid = false;
   } else {
-    clearError("quantity");
+    clearErrorMessage("quantity");
   }
 
   // radio button verification
   if (!location) {
-    showError("location1", "Vous devez choisir une option.");
+    showErrorMessage("location1", "Vous devez choisir une option.");
     isValid = false;
   } else {
-    clearError("location1");
+    clearErrorMessage("location1");
   }
 
   // Terms of use verification
   if (!termsChecked) {
-    showError("checkbox1", "Vous devez vérifier que vous acceptez les termes et conditions.");
-    isValid = false;
+    showErrorMessage("checkbox1", "Vous devez vérifier que vous acceptez les termes et conditions.");
+    isValid = false; 
   } else {
-    clearError("checkbox1");
+    clearErrorMessage("checkbox1");
   }
 
   return isValid; 
+}
+
+// Create a confirmation message
+function showConfirmationMessage(callback) {
+  const confirmationMessage = document.createElement("div");
+  confirmationMessage.classList.add("confirmation-message")
+  confirmationMessage.textContent = "Merci ! Votre réservation a été reçue.";
+
+  // DOM Elements
+  const targetFormData = document.getElementById("targetFormData");
+  const submitButton = document.querySelector(".btn-submit");
+
+  // Hidden btn-submit
+  submitButton.style.display = "none";
+
+  // Add the message to DOM
+  targetFormData.insertAdjacentElement('afterend', confirmationMessage);
+
+  // Remove the message after a few seconds and execute the callback
+  setTimeout(() => {
+    confirmationMessage.remove();
+    if (callback) {
+      callback();
+    }
+  }, 1000);
 }
 

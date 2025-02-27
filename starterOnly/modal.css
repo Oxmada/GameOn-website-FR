@@ -321,8 +321,7 @@ input[data-error]::after {
 .close:after {
   transform: rotate(-45deg);
 }
-.btn-submit,
-.btn-signup {
+.btn-submit,.btn-signup {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -479,15 +478,30 @@ footer {
   margin: 0 20px;
 }
 
+/* Error message style */
+
 .error-message {
   color: white;
   font-size: 14px;
   margin-top: 5px;
   margin-bottom: 10px;
-  border: 1px solid red;
-  border-radius: 8px;
   padding: 5px;
   background-color: red;
+  border-radius: 8px;
+  text-align: left;
+}
+
+/* confirmation message style */
+
+.confirmation-message {
+  padding: 10px;
+  margin: 20px 0 10px 0;
+  background-color: #24b744;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 
