@@ -146,24 +146,50 @@ function validate(event) {
 function showConfirmationMessage(callback) {
   const confirmationMessage = document.createElement("div");
   confirmationMessage.classList.add("confirmation-message")
-  confirmationMessage.textContent = "Merci ! Votre réservation a été reçue.";
+  confirmationMessage.textContent = "Merci pour votre inscription";
 
   // DOM Elements
+  const modalBody = document.querySelector(".modal-body");
   const targetFormData = document.getElementById("targetFormData");
   const submitButton = document.querySelector(".btn-submit");
+  const formDataElements = document.querySelectorAll(".formData");
 
-  // Hidden btn-submit
-  submitButton.style.display = "none";
+
+  // Update submitButton
+  submitButton.value = "Fermer";
+  submitButton.style.position = "absolute";
+  submitButton.style.bottom = "20px";
+  submitButton.style.left = "50%";
+  submitButton.style.transform = "translateX(-50%)";
+  submitButton.style.width = "30%";
+  submitButton.style.textAlign = "center";
+  submitButton.style.padding = "12px 0";
+
+  // Update formData
+  formData.forEach((element) => {
+    element.style.display = "none";
+  });
+
+  // Update modalBody
+  modalBody.style.height = "850px"
+
 
   // Add the message to DOM
-  targetFormData.insertAdjacentElement('afterend', confirmationMessage);
+  modalBody.appendChild(confirmationMessage);
 
-  // Remove the message after a few seconds and execute the callback
-  setTimeout(() => {
+  // Close the popup when submitButton is clicked
+  submitButton.addEventListener("click", () => {
     confirmationMessage.remove();
     if (callback) {
       callback();
     }
-  }, 1000);
-}
+  });
 
+  // Close the popup when closeSpan is clicked
+  closeSpan.addEventListener("click", () => {
+    confirmationMessage.remove();
+    if (callback) {
+      callback();
+    }
+  });
+}
