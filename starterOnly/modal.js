@@ -29,9 +29,8 @@ modalbg.style.display = "none";
 
 // Prevents submission if validation fails
 document.querySelector("form").addEventListener("submit", (event) => {
-  if (!validate(event)) {
-    event.preventDefault(); 
-  } else {
+  event.preventDefault();
+  if (validate(event)) {
     // Prevent submission to show the confirmation message
     event.preventDefault();
     showConfirmationMessage(() => {
@@ -52,9 +51,13 @@ function validate(event) {
   const termsChecked = document.getElementById("checkbox1").checked;
   const birthdate = document.getElementById("birthdate").value;
 
+  
   // Function to display an error message
   function showErrorMessage(id, message) {
     const field = document.getElementById(id);
+
+    // Ajouter la classe pour la bordure rouge
+    field.classList.add("error-border");
 
     //Search for the existing error element
     let errorElement = field.parentNode.querySelector(".error-message");
@@ -73,6 +76,10 @@ function validate(event) {
   // Function to delete an error message
   function clearErrorMessage(id) {
     const field = document.getElementById(id);
+
+    // Supprimer la classe pour la bordure rouge
+    field.classList.remove("error-border");
+
     let errorElement = field.parentNode.querySelector(".error-message");
 
     if (errorElement) {
@@ -138,7 +145,9 @@ function validate(event) {
   } else {
     clearErrorMessage("checkbox1");
   }
-
+  if (isValid) {
+    console.log(firstName,lastName,email,quantity,location.value,birthdate,termsChecked)
+  }
   return isValid; 
 }
 
