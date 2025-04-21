@@ -1,5 +1,19 @@
-# Projet GameOn
-1. Forkez ce repo ;
-2. Il est conseillé d'utiliser VisualStudio Code et vous pouvez utiliser Docker, mais ce n'est pas obligatoire ;
-3. Il n'y a aucune dépendance ;
-4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
+![Logo GameOn](./logo.png)
+
+---
+
+## 🎮 Projet GameOn
+Création d'un formulaire d'inscription en Javascript avec une vérification automatique des champs en fonction des données saisies.
+
+---
+
+## 📥 Installation
+Aucune installation ou dépendance nécessaire. Il suffit de cloner le dépôt et de commencer à l'utiliser.
+
+---
+
+## 🔗 Liens utiles
+
+| 🌐 **Version hébergée**                        | 🎨 **Maquette Figma**                              |
+|-----------------------------------------------|--------------------------------------------------|
+| [Voir en ligne](oxmada.github.io/GameOn-website-FR/) | [Accéder à la maquette](https://www.figma.com/design/B7NKBDvSI18uoMLJgpnh48/UI-Design-GameOn-FR?node-id=0-1&p=f&t=jbmGOAfZGUxuoLei-0) |
