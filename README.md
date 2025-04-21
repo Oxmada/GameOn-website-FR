@@ -1,4 +1,4 @@
-![Logo GameOn](./logo.png)
+![Logo GameOn](Logo.png)
 
 ---
 
